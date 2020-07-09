@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>랜덤숫자 맞추기 게임</title>
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+
+      .lastResult {
+        color: white;
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>랜덤숫자 맞추기 게임</h1>
+
+    <p>1~100까지의 숫자가 랜덤으로 생성됩니다.<br> 기회는 10번!!!!! 도전해보세요~</p>
+
+    <div class="form">
+      <label for="guessField">Enter a guess: </label><input type="text" id="guessField" class="guessField">
+      <input id="subtn"  type="submit" value="Submit guess" class="guessSubmit">
+    </div>
+
+    <div id="resultParas">
+      <p id="guesses"></p>
+      <p id="lastResult"></p>
+      <p id="lowOrHi"></p>
+      <p id="Result"></p>
+    </div>
+
+    <script>
+
+      const randomNumber = Math.floor(Math.random()*100)+1;
+      console.log(randomNumber);
+    const subtn = document.getElementById('subtn');
+  // let myguesses= document.getElementById('guessField').value; 
+    const mathArry= [];
+
+    let gameOver=0;
+    document.getElementById('subtn').addEventListener("click",function(e){
+        e.preventDefault();
+         
+        if(gameOver<10){
+        let myguesses= parseInt(document.getElementById('guessField').value); 
+        mathArry.push(myguesses); 
+        document.getElementById('guesses').innerHTML=mathArry;
+        if(myguesses === randomNumber){
+            
+            const overBtn=confirm("성공하셨습니다.\n다시 시작하겠습니까?");
+            if(overBtn == true){
+                      window.location.reload();
+                    }else{
+                        location.href="https://www.naver.com/";
+                     }
+
+             }else if(randomNumber < myguesses){
+                    document.getElementById('lastResult').innerHTML="입력한 값이 큽니다";
+                }else if(randomNumber > myguesses){
+                    document.getElementById('lastResult').innerHTML="입력한 값이 작습니다.";
+                  
+                }
+               gameOver++;
+             document.getElementById('lowOrHi').innerHTML=gameOver +"번째 도전중";
+             }else{
+                const overBtn=confirm("기회가 끝났습니다.\n다시 시작하겠습니까?");
+                 if(overBtn == true){
+                      window.location.reload();
+                    }else{
+                        location.href="https://www.naver.com/";
+                     }
+                  }
+          })
+  
+    </script>
+  </body>
+</html>
